@@ -1,22 +1,108 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+
+body {
+  background: #000 url('./assets/background.jpg') no-repeat;
+  background-size: cover;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+body, input, button {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.container{
+  margin: 10% auto;
+  display: flex;
+  max-width: 450px;
+  width:100%;
+  justify-content: stretch;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content{
+  width: 100%;
+  background: #fff;
+  margin-top: 50px;
+  border-radius: 4px;
+  padding: 30px;
+}
+
+
+.content > p{
+  font-size: 22px;
+  line-height: 30px;
+  margin-bottom: 30px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.content form{
   display: flex;
+  color: rgb(2, 1, 1);
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.App-link {
-  color: #09d3ac;
+.content form label{
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.content form label span{
+  font-weight: normal;
+  color: #999;
+  font-size: 12px;
+}
+
+
+.content form input {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  height: 45px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+
+.formBtn{
+  border: 0;
+  border-radius: 2px;
+  width: 100%;
+  height: 42px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.formBtn .linkToPage{
+  text-decoration: none;
+}
+
+.formBtn .linkToPage:visited{
+  color: #fff;
+}
+
+.formBtn.do{
+  background: #f05a5b;
+}
+
+.formBtn.do:hover{
+  background: #cf5252;
 }

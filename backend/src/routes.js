@@ -11,6 +11,9 @@ const routes = express.Router();
 const upload = multer(uploadConfig);
 
 
+routes.get('/', (req, res) => {
+    return res.json({message:"Entrou no paradoxo code"})
+});
 
 routes.post('/sessions', SessionController.store);
 

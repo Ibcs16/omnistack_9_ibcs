@@ -1,21 +1,24 @@
 import React from 'react';
+
 import './App.css';
+import logo from './assets/logo.svg';
+
+import Routes from './routes';
+
 
 function App() {
+  
+
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="container">
+          <img src={logo} alt="AirCnC"/>
+          <div className="content">
+            <Routes/>
+          </div>
+         
+        </div>
       </header>
     </div>
   );
