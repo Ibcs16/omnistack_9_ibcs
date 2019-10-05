@@ -1,11 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {Link} from  'react-router-dom';
 import api from '../../services/api'
+import socketio from 'socket.io-client'
+
 import './styles.css'
 
+//useMemo memorizar valor de variavel até que algo mude
 
 export default function Dashboard() {
     const [spots, setSpots] = useState([])
+    const [requests, setRequests] = useState([])
+
+    const user_id = localStorage.getItem('user');
+    const socket = useMemo(() => socketio('http://localhost:3333', {
+        query: { user_id }
+    }), [user_id]);
+
+    async function handleRequest(id, accept){
+        if(accept){
+            await api.post(`/bookings/${id}/approvals`,{
+                headers: { user_id }
+            });
+    
+        }else{
+            await api.post(`/bookings/${id}/rejections`,{
+                headers: { user_id }
+            });
+        }
+
+            setRequests(requests.filter(request => request._id !== id));
+    }
+
+
+    useEffect(() => {
+        
+        socket.on('booking_request', data => {
+            
+            setRequests([...requests, data]);
+        })
+       
+    },[requests, socket])
+
 
    useEffect(() => {
      async function loadSpots(){
@@ -14,7 +49,6 @@ export default function Dashboard() {
            { headers: {user_id} }
         );
 
-        console.log(res.data)
         setSpots(res.data);
      }
 
@@ -22,6 +56,18 @@ export default function Dashboard() {
    }, [])
     return (
         <>
+        <ul className="notifications">
+            {requests.map(request => (
+                <li key={request._id}>
+                    <p>
+                        <strong>{request.user.email}</strong> está solicitando uma reserva em<strong> {request.spot.company} </strong>na data de<strong> {request.date} </strong>
+                    </p>
+                    <button onClick={()=>handleRequest(request._id, true)} className="btnRequest btnAccept">ACEITAR</button>
+                    <button onClick={() => handleRequest(request._id, false)} className="btnRequest btnDecline">REJEITAR</button>
+                </li>
+            ))
+            }
+        </ul>
            <ul className="spot-list">
                 {spots.map(spot => (
                     <li key={spot._id}>

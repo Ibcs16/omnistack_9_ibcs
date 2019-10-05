@@ -19,26 +19,13 @@ function SpotList({ tech , navigation}) {
                 params: { tech }
             })
 
-            
+            setSpots(response.data)
 
 
         }
 
         loadSpots()
-        setSpots([
-            {
-            'company':'WheyCoding',
-            'price': 29,
-            'thumbnail_url': 'no_url',
-            '_id':'022'
-        },
-        {
-            'company':'CakeCoding',
-            'price': 0,
-            'thumbnail_url': 'no_url',
-            '_id':'023'
-        }
-        ])
+       
 
     },[]
     )

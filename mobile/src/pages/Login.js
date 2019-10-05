@@ -32,45 +32,43 @@ export default function Login({ navigation }) {
         await AsyncStorage.setItem('user', _id);
         await AsyncStorage.setItem('techs', techs);
 
-        mavigation.navigate('List')
+        navigation.navigate('List')
     }
   return (
-  <KeyboardAvoidingView 
-//enabled={Platform.OS=='ios'} comentado pq esta no expo
-  behavior='padding'
-  style={styles.container}>
-    <Image source={logo}></Image>
+    <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        style={styles.container}>
+        <Image source={logo}></Image>
 
-    <View style={styles.form}>
-        <Text style={styles.label}>SEU E-MAIL</Text>
-        <TextInput
-            style={styles.input}
-            placeholder="Seu e-mail"
-            placeholderTextColor="#999"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
-            value={email}
-            //nao usa onChange => onChangeText
-            onChangeText={setEmail}
-        />
+        <View style={styles.form}>
+            <Text style={styles.label}>SEU E-MAIL</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Seu e-mail"
+                placeholderTextColor="#999"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                value={email}
+                //nao usa onChange => onChangeText
+                onChangeText={setEmail}
+            />
 
-        <Text style={styles.label}>TECNOLOGIAS</Text>
-        <TextInput
-            style={styles.input}
-            placeholder="Tecnologias do seu interesse"
-            placeholderTextColor="#999"
-            autoCapitalize="words"
-            autoCorrect={false}
-            value={techs}
-            onChangeText={setTechs}
-        />
-        <TouchableOpacity onPress={handleSubmit} style={styles.btnDo}>
-            <Text style={styles.btnTxt}>Encontrar spots</Text>
-        </TouchableOpacity>
-    </View>    
-    
-  </KeyboardAvoidingView>
+            <Text style={styles.label}>TECNOLOGIAS</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Tecnologias do seu interesse"
+                placeholderTextColor="#999"
+                autoCapitalize="words"
+                autoCorrect={false}
+                value={techs}
+                onChangeText={setTechs}
+            />
+            <TouchableOpacity onPress={handleSubmit} style={styles.btnDo}>
+                <Text style={styles.btnTxt}>Encontrar spots</Text>
+            </TouchableOpacity>
+        </View>    
+    </KeyboardAvoidingView>
   )
 }
 
