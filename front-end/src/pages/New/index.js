@@ -30,9 +30,15 @@ export default function New({history}) {
     data.append('company', company);
     data.append('price', price);
 
-    await api.post('/spots', data, {
+    const res = await api.post('/spots', data, {
         headers: {user_id}
     })
+
+    if(res.status===200){
+        //Todo mostrar dialog de OK
+    }else if(res.status===429){
+        //Todo mostrar dialog de muitas requisições
+    }
 
     history.push('/dashboard')
 
