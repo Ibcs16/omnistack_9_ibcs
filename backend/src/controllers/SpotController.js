@@ -23,7 +23,7 @@ module.exports = {
 
         let numberOfSpotsbyUser = await Spot.countDocuments({ user: user_id });
 
-        if(numberOfSpotsbyUser<3){
+        if(numberOfSpotsbyUser>=3){
             return res.status(429).json({ error: "Já registrou spots demais" })
         }
 
