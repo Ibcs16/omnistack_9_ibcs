@@ -1,4 +1,6 @@
 const express = require('express');
+require('dotenv').config();
+
 const mongoose = require('mongoose')
 const routes = require('./routes');
 const socketio = require('socket.io');
@@ -13,8 +15,7 @@ const server = http.Server(app);
 const io = socketio(server);
 
 
-
-mongoose.connect("mongodb+srv://iagobrayham:iagobrayham@cluster0-h2jsn.mongodb.net/semana09?retryWrites=true&w=majority",
+mongoose.connect(process.env.MONGO_DB,
 {useNewUrlParser: true, useUnifiedTopology: true});
 
 const connectedUsers = [];

@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const uploadConfig = require('./config/upload');
+const storage = require('./config/upload');
 
 const SessionController = require('./controllers/SessionController');
 const SpotController = require('./controllers/SpotController');
@@ -9,8 +9,9 @@ const BookingController = require('./controllers/BookingController');
 const ApprovalController = require('./controllers/ApprovalController');
 const RejectionController = require('./controllers/RejectionController');
 
+
 const routes = express.Router();
-const upload = multer(uploadConfig);
+// = multer(uploadConfig);
 
 
 routes.get('/', (req, res) => {
@@ -20,7 +21,7 @@ routes.get('/', (req, res) => {
 routes.post('/sessions', SessionController.store);
 
 
-routes.post('/spots', upload.single('thumbnail'), SpotController.store);
+routes.post('/spots', multer(storage).single('thumbnail'), SpotController.store);
 
 routes.get('/spots', SpotController.index);
 
